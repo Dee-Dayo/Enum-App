@@ -7,20 +7,21 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={`${styles.flexCenter} ${styles.spaceBetween}`}>
         <Image src="/logo.png" alt="Logo" width={32} height={32} />
-        <span className="text-blue-600 font-semibold text-lg">enum</span>
+        <Image src="/enum.png" alt="Enum Logo" width={100} height={32} />
       </div>
 
       <div className={styles.flexCenter}>
-        <Link href="/" className={styles.navItem}>Home</Link>
-        {/* Uncomment the lines below when those routes are available */}
-        {/*<Link href="/workspace" className={styles.navItem}>Workspace</Link>*/}
-        {/*<Link href="/resources" className={styles.navItem}>Resources Library</Link>*/}
+        <Link href="/" className={`${styles.navItem}`}>Home</Link>
+        <Link href="/" className={`${styles.navItem} ${styles.active}`}>Workspace</Link>
+        <Link href="/" className={styles.navItem}>Resources Library</Link>
       </div>
 
       <div className={`${styles.flexCenter} ${styles.spaceBetween}`}>
+        <Image src="/bell.png" alt="Notifications" width={24} height={24} className={styles.icon} />
         <Image src="/profile.png" alt="Profile" width={32} height={32} className="rounded-full" />
         <span>Onowomano</span>
-        <button className={styles.profileButton}>View Profile</button>
+        <Image src="/arrow_down.png" alt="Dropdown" width={16} height={16} className={styles.icon} />
+        <Image src="/group.png" alt="Group" width={16} height={16} className={styles.icon} />
       </div>
     </nav>
   );

@@ -1,6 +1,6 @@
 import Layout from "@/app/components/layout/Layout";
 
-export default function Home() {
+export default function Page() {
   return (
     <Layout>
       <div className="p-8">

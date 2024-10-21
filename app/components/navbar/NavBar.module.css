@@ -21,10 +21,27 @@
   margin-right: 32px;
   color: #4a5568;
   transition: color 0.3s;
+  position: relative;
 }
 
 .navItem:hover {
   color: #3182ce;
+}
+
+.navItem.active {
+  color: #3182ce;
+}
+
+.navItem.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 2px;
+  background-color: #3182ce;
+  border-radius: 50%;
 }
 
 .profileButton {
@@ -34,4 +51,20 @@
 
 .profileButton:hover {
   color: #3182ce;
+}
+
+.icon {
+  margin: 0 0.5rem;
+}
+
+.smallBoxes {
+  display: flex;
+  margin-left: 1rem;
+}
+
+.box {
+  width: 8px;
+  height: 8px;
+  background-color: #000;
+  margin: 0 2px;
 }
