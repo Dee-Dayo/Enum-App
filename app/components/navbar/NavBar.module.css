@@ -1,0 +1,37 @@
+.navbar {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Utility classes for reuse */
+.flexCenter {
+  display: flex;
+  align-items: center;
+}
+
+.spaceBetween {
+  gap: 16px; /* Equivalent to space-x-4 in Tailwind CSS */
+}
+
+.navItem {
+  margin-right: 32px;
+  color: #4a5568;
+  transition: color 0.3s;
+}
+
+.navItem:hover {
+  color: #3182ce;
+}
+
+.profileButton {
+  color: #4a5568;
+  transition: color 0.3s;
+}
+
+.profileButton:hover {
+  color: #3182ce;
+}
