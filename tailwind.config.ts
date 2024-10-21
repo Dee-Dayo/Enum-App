@@ -2,15 +2,18 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",   // Includes all page files
-    "./components/**/*.{js,ts,jsx,tsx,mdx}", // Includes all component files
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",     // If you're using the `/app` directory (e.g., Next.js 13+)
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",  // Custom background color
-        foreground: "var(--foreground)",  // Custom foreground color
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        customGray: '#475661',
+        customBlue: '#008eef',
+        customLightBlue: '#f6fcff',
       },
     },
   },
