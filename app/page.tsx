@@ -1,12 +1,15 @@
 import Layout from "@/app/components/Layout/Layout";
+import Sidebar from "@/app/pages/Workspace/SideBar/SideBar";
 
-export default function Home() {
+export default function Page() {
   return (
-    <Layout>
-      <div className="p-8">
-        <h2>Welcome to the Home Page</h2>
-        <p>This is the main content of the page.</p>
-      </div>
-    </Layout>
+      <Layout>
+          <div className="flex">
+              <Sidebar/>
+              <div className="p-8 flex-grow">
+                  {/* Main content goes here */}
+              </div>
+          </div>
+      </Layout>
   );
 }
