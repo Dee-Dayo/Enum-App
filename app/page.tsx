@@ -1,5 +1,6 @@
 import Layout from "@/app/components/Layout/Layout";
 import Sidebar from "@/app/pages/Workspace/SideBar/SideBar";
+import Cohort from "@/app/pages/Workspace/Cohort/Cohort";
 
 export default function Page() {
   return (
@@ -7,7 +8,7 @@ export default function Page() {
           <div className="flex">
               <Sidebar/>
               <div className="p-8 flex-grow">
-                  {/* Main content goes here */}
+                  <Cohort/>
               </div>
           </div>
       </Layout>

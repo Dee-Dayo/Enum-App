@@ -19,7 +19,7 @@ const Sidebar: FC = () => {
   };
 
   return (
-    <div className="flex flex-col px-12 py-10 bg-gray-100 h-full">
+    <div className="flex flex-col px-12 py-10 h-full">
       <div
         className={`flex items-center mb-4 cursor-pointer w-48 p-2 ${getOptionClass('cohorts')}`}
         onClick={() => handleClick('cohorts')}
