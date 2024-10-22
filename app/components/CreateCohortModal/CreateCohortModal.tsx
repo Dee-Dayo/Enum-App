@@ -1,5 +1,6 @@
 import { FC, useRef } from 'react';
 import { Modal, Box, Typography, TextField, IconButton, MenuItem } from '@mui/material';
+import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import CustomDatePicker from "@/app/components/DatePicker/CustomDatePicker";
@@ -51,24 +52,24 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
             <CloseIcon />
           </IconButton>
 
-          <Typography variant="h6" component="h2" sx={{ mb: 4, color: 'customGray' }}>
+          <Typography variant="h6" component="h2" sx={{ mb: 4, color: '#475661' }}>
             Create a Cohort
           </Typography>
 
           <form>
             <Box sx={{ mb: 3 }}>
-              <Typography variant="body2" sx={{ mb: 1, color: 'customGray' }}>Cohort Name</Typography>
+              <Typography variant="body2" sx={{ mb: 1, color: '#475661 ' }}>Cohort Name</Typography>
               <TextField
                 fullWidth
                 placeholder="Ex. Cohort 1"
                 variant="outlined"
                 size="small"
-                InputProps={{ style: { color: 'customGray' } }}
+                InputProps={{ style: { color: '#475661' } }}
               />
             </Box>
 
             <Box sx={{ mb: 3 }}>
-              <Typography variant="body2" sx={{ mb: 1, color: 'customGray' }}>Description</Typography>
+              <Typography variant="body2" sx={{ mb: 1, color: '#475661' }}>Description</Typography>
               <TextField
                 fullWidth
                 multiline
@@ -76,19 +77,19 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 placeholder="Ex. A space for Python developers"
                 variant="outlined"
                 size="small"
-                InputProps={{ style: { color: 'customGray' } }}
+                InputProps={{ style: { color: '#475661' } }}
               />
             </Box>
 
             <Box sx={{ mb: 3 }}>
-              <Typography variant="body2" sx={{ mb: 1, color: 'customGray' }}>Program</Typography>
+              <Typography variant="body2" sx={{ mb: 1, color: '#475661' }}>Program</Typography>
               <TextField
                 select
                 fullWidth
                 defaultValue=""
                 variant="outlined"
                 size="small"
-                InputProps={{ style: { color: 'customGray' } }}
+                InputProps={{ style: { color: '#475661' } }}
               >
                 <MenuItem value="" disabled>
                   Select Program
@@ -101,43 +102,52 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
               <CustomDatePicker label="End Date" />
             </Box>
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: '2px dashed #008eef',
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="body2" sx={{ mb: 1, color: '#475661' }}>Add a cohort avatar</Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '2px dashed #008eef',
                   background: '#f6fcff',
-                borderRadius: '8px',
-                p: 2,
-                mb: 3,
-                textAlign: 'center',
-                color: 'customGray',
-              }}
-            >
-              <FileUploadOutlinedIcon sx={{ fontSize: 40, color: '#475661' }} />
-              <Typography variant="body2" sx={{ mt: 1, color: 'customGray' }}>
-                Drag and drop or{' '}
-                <span
-                  onClick={handleFileChooseClick}
-                  style={{ fontWeight: 'bold', cursor: 'pointer', color: '#008eef' }}
-                >
-                  choose file
-                </span>
-                {' '}
-              </Typography>
-              <input
-                type="file"
-                ref={fileInputRef}
-                style={{ display: 'none' }}
-              />
+                  borderRadius: '8px',
+                  p: 2,
+                  mb: 1,
+                  textAlign: 'center',
+                  color: '#475661',
+                }}
+              >
+                <FileUploadOutlinedIcon sx={{ fontSize: 40, color: '#475661' }} />
+                <Typography variant="body2" sx={{ mt: 1, color: '#475661' }}>
+                  Drag and drop or{' '}
+                  <span
+                    onClick={handleFileChooseClick}
+                    style={{ fontWeight: 'bold', cursor: 'pointer', color: '#008eef' }}
+                  >
+                    choose file
+                  </span>
+                </Typography>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
+                />
+                  <Typography variant="caption" sx={{ textAlign: 'left', color: '#898d92' }}>
+                      240x240 px Recommended, max size 1MB
+                  </Typography>
+              </Box>
+                <ErrorOutlineOutlinedIcon sx={{ fontSize: 16, color: '#475661' }} />
+                <Typography variant="caption" sx={{ textAlign: 'left', color: '#475661' }}>
+                   You can do this later.
+                </Typography>
             </Box>
 
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
-              <CustomButton color="bg-gray-500 text-white" text="Cancel" onClick={onClose}/>
-              <CustomButton color="bg-gray-300 text-gray-700 hover:bg-blue-500 hover:text-white" text="Create Cohort"/>
-            </Box>
+           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+               <CustomButton color="customBlue" text="Cancel" onClick={onClose} outline />
+               <CustomButton color="bg-gray-300 text-gray-700 hover:bg-blue-500 hover:text-white" text="Create Cohort"/>
+           </Box>
           </form>
         </Box>
       </Modal>
