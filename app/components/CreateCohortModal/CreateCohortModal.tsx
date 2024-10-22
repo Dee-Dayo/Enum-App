@@ -1,8 +1,8 @@
-'use client'
-
-import { FC } from 'react';
+import { FC, useRef } from 'react';
+import { Modal, Box, Typography, TextField, IconButton, MenuItem } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Image from 'next/image';
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import CustomDatePicker from "@/app/components/DatePicker/CustomDatePicker";
 import CustomButton from "@/app/components/Button/CustomBotton";
 
 interface ModalProps {
@@ -11,61 +11,137 @@ interface ModalProps {
 }
 
 const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
+  // Ref for file input
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Function to trigger the file input dialog when "Choose file" is clicked
+  const handleFileChooseClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-customBlue_dark bg-opacity-80">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-1/2 max-h-screen overflow-y-auto relative">
-        <button className="absolute top-4 right-4" onClick={onClose}>
-          <CloseIcon className="text-gray-500" />
-        </button>
-        <h2 className="text-1xl font-semibold mb-4 text-customGray">Create a Cohort</h2>
-        <form>
-          <div className="mb-4">
-            <label className="block text-customGray text-sm">Cohort Name</label>
-            <input type="text" className="w-full p-2 border rounded text-sm" placeholder="Ex. Cohort 1"/>
-          </div>
+    <>
+      <div className="fixed inset-0 bg-customBlue_dark bg-opacity-80 z-40" onClick={onClose}></div>
 
-          <div className="mb-4">
-            <label className="block text-customGray text-sm">Description</label>
-            <textarea className="w-full p-2 border rounded text-sm"
-                      placeholder="Ex. A space for Python developers"></textarea>
-          </div>
+      <Modal open={isOpen} onClose={onClose}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '600px',
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            borderRadius: 2,
+            zIndex: 50,
+            overflowY: 'auto',
+            maxHeight: '90vh',
+          }}
+        >
+          <IconButton
+            onClick={onClose}
+            sx={{ position: 'absolute', top: 16, right: 16 }}
+          >
+            <CloseIcon />
+          </IconButton>
 
-          <div className="mb-4">
-            <label className="block text-customGray text-sm">Program</label>
-            <select className="w-full p-2 border rounded text-sm">
-              <option value="" disabled selected></option>
-            </select>
-          </div>
+          <Typography variant="h6" component="h2" sx={{ mb: 4, color: 'customGray' }}>
+            Create a Cohort
+          </Typography>
 
-          <div className="mb-4 flex space-x-4">
-            <div className="w-1/2">
-              <label className="block text-gray-700">From Date</label>
-              <input type="date" className="w-full p-2 border rounded" />
-            </div>
-            <div className="w-1/2">
-              <label className="block text-gray-700">To Date</label>
-              <input type="date" className="w-full p-2 border rounded" />
-            </div>
-          </div>
-          {/*<div className="mb-4">*/}
-          {/*  <label className="block text-gray-700">Add or select users</label>*/}
-          {/*  <input type="text" className="w-full p-2 border rounded" placeholder="Type names or emails" />*/}
-          {/*</div>*/}
-          {/*<div className="mb-4">*/}
-          {/*  <label className="block text-gray-700">Add a cohort avatar</label>*/}
-          {/*  <div className="flex items-center justify-center border-dashed border-2 border-gray-300 rounded p-4">*/}
-          {/*    <Image src="/path/to/avatar-placeholder.png" alt="Avatar Placeholder" width={50} height={50} />*/}
-          {/*  </div>*/}
-          {/*</div>*/}
-          <div className="flex justify-end space-x-2">
-            <CustomButton color="bg-gray-500 text-white" text="Cancel" onClick={onClose}/>
-            <CustomButton color="bg-gray-300 text-gray-700 hover:bg-blue-500 hover:text-white" text="Create Cohort"/>
-          </div>
-        </form>
-      </div>
-    </div>
+          <form>
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="body2" sx={{ mb: 1, color: 'customGray' }}>Cohort Name</Typography>
+              <TextField
+                fullWidth
+                placeholder="Ex. Cohort 1"
+                variant="outlined"
+                size="small"
+                InputProps={{ style: { color: 'customGray' } }}
+              />
+            </Box>
+
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="body2" sx={{ mb: 1, color: 'customGray' }}>Description</Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={3}
+                placeholder="Ex. A space for Python developers"
+                variant="outlined"
+                size="small"
+                InputProps={{ style: { color: 'customGray' } }}
+              />
+            </Box>
+
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="body2" sx={{ mb: 1, color: 'customGray' }}>Program</Typography>
+              <TextField
+                select
+                fullWidth
+                defaultValue=""
+                variant="outlined"
+                size="small"
+                InputProps={{ style: { color: 'customGray' } }}
+              >
+                <MenuItem value="" disabled>
+                  Select Program
+                </MenuItem>
+              </TextField>
+            </Box>
+
+            <Box sx={{ mb: 3, display: 'flex', gap: 2 }}>
+              <CustomDatePicker label="Start Date" />
+              <CustomDatePicker label="End Date" />
+            </Box>
+
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '2px dashed #008eef',
+                  background: '#f6fcff',
+                borderRadius: '8px',
+                p: 2,
+                mb: 3,
+                textAlign: 'center',
+                color: 'customGray',
+              }}
+            >
+              <FileUploadOutlinedIcon sx={{ fontSize: 40, color: '#475661' }} />
+              <Typography variant="body2" sx={{ mt: 1, color: 'customGray' }}>
+                Drag and drop or{' '}
+                <span
+                  onClick={handleFileChooseClick}
+                  style={{ fontWeight: 'bold', cursor: 'pointer', color: '#008eef' }}
+                >
+                  choose file
+                </span>
+                {' '}
+              </Typography>
+              <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+              />
+            </Box>
+
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+              <CustomButton color="bg-gray-500 text-white" text="Cancel" onClick={onClose}/>
+              <CustomButton color="bg-gray-300 text-gray-700 hover:bg-blue-500 hover:text-white" text="Create Cohort"/>
+            </Box>
+          </form>
+        </Box>
+      </Modal>
+    </>
   );
 };
 
