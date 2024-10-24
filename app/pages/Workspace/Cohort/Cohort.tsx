@@ -13,7 +13,7 @@ const Cohort: FC = () => {
 
     return (
         <div>
-            <h2 className="text-2xl font-semibold m-2 text-customGray">Cohorts</h2>
+            <h2 className="text-2xl font-ibm-plex-serif font-semibold m-2 text-customGray">Cohorts</h2>
             <div className="flex flex-col items-center justify-center">
                 <Image src="/empty.png" alt="Empty State" width={130} height={130} className="mb-4" />
                 <h2 className="text-2xl font-semibold mb-2 text-customGray">Empty Space</h2>

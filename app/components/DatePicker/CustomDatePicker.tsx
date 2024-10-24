@@ -1,10 +1,19 @@
 import { FC, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { format } from 'date-fns';
 
-const CustomDatePicker: FC<{ label: string }> = ({ label }) => {
+interface CustomDatePickerProps {
+  label: string;
+  onChange: (date: Date | null) => void;  // Accept onChange as a prop
+}
+
+const CustomDatePicker: FC<CustomDatePickerProps> = ({ label, onChange }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
+
+  const handleDateChange = (date: Date | null) => {
+    setStartDate(date);
+    onChange(date);  // Trigger the parent's onChange with the selected date
+  };
 
   return (
     <div className="mb-4">
@@ -12,7 +21,7 @@ const CustomDatePicker: FC<{ label: string }> = ({ label }) => {
       <div className="relative">
         <DatePicker
           selected={startDate}
-          onChange={(date: Date) => setStartDate(date)}
+          onChange={handleDateChange}  // Use the local handler
           placeholderText="23 Dec 2021"
           dateFormat="dd MMM yyyy"
           className="w-full p-2 border rounded text-sm"

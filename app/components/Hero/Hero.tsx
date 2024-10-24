@@ -15,6 +15,7 @@ const Hero = () => {
           </div>
           <Button
               variant="contained"
+              disableElevation
               style={{ backgroundColor: 'white',
                 color: 'black',
                 width: '100%',

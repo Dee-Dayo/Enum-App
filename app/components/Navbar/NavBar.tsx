@@ -10,8 +10,8 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md px-12 py-4 flex justify-between items-center relative">
       <div className="flex items-center space-x-4">
-        <Image src="/logo.png" alt="Logo" width={25} height={25} />
-        <Image src="/enum.png" alt="Enum Logo" width={70} height={22} className="hidden md:block" />
+        <Image src="/logo.png" alt="Logo" width={24.88} height={29.02} />
+        <Image src="/enum.png" alt="Enum Logo" width={66.07} height={14.33} className="hidden md:block" />
       </div>
 
       <div className="items-center space-x-8 hidden md:flex">
@@ -35,11 +35,11 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center space-x-4">
-        <NotificationsNoneIcon className="text-customGray" />
+        <NotificationsNoneIcon className="text-customGray" fontSize="large" />
         <Image src="/profile.png" alt="Profile" width={32} height={32} className="rounded-full" />
         <span className="text-customGray hidden md:block">Onowomano</span>
         <ExpandMoreIcon className="text-customGray hidden md:block" />
-        <AppsIcon className="text-customBlue hidden md:block" />
+        <AppsIcon className="text-customBlue hidden md:block" fontSize="large"/>
       </div>
     </nav>
   );

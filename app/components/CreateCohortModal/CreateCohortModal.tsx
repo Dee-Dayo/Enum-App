@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { Modal, Box, Typography, TextField, IconButton, MenuItem } from '@mui/material';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import CloseIcon from '@mui/icons-material/Close';
@@ -12,15 +12,54 @@ interface ModalProps {
 }
 
 const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
-  // Ref for file input
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  // Function to trigger the file input dialog when "Choose file" is clicked
+  const [cohortName, setCohortName] = useState("");
+  const [description, setDescription] = useState("");
+  const [program, setProgram] = useState("");
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [formError, setFormError] = useState("");
+
   const handleFileChooseClick = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click();
+      if ("click" in fileInputRef.current) {
+        fileInputRef.current.click();
+      }
     }
   };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  const handleSubmit = () => {
+    e.preventDefault()
+    if (!cohortName || !description || !program || !startDate || !endDate || !selectedFile) {
+    setFormError("All fields are required.");
+    return;
+  }
+
+  setFormError("");
+
+  const cohortData = {
+    cohortName,
+    description,
+    program,
+    startDate,
+    endDate,
+    selectedFileName: selectedFile?.name,
+  };
+
+  sessionStorage.setItem("cohortData", JSON.stringify(cohortData));
+
+  onClose();
+};
+
 
   if (!isOpen) return null;
 
@@ -57,6 +96,7 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
           </Typography>
 
           <form>
+            {/* Cohort Name */}
             <Box sx={{ mb: 3 }}>
               <Typography variant="body2" sx={{ mb: 1, color: '#475661 ' }}>Cohort Name</Typography>
               <TextField
@@ -64,10 +104,13 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 placeholder="Ex. Cohort 1"
                 variant="outlined"
                 size="small"
+                value={cohortName}
+                onChange={(e) => setCohortName(e.target.value)}
                 InputProps={{ style: { color: '#475661' } }}
               />
             </Box>
 
+            {/* Description */}
             <Box sx={{ mb: 3 }}>
               <Typography variant="body2" sx={{ mb: 1, color: '#475661' }}>Description</Typography>
               <TextField
@@ -77,16 +120,20 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 placeholder="Ex. A space for Python developers"
                 variant="outlined"
                 size="small"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 InputProps={{ style: { color: '#475661' } }}
               />
             </Box>
 
+            {/* Program */}
             <Box sx={{ mb: 3 }}>
               <Typography variant="body2" sx={{ mb: 1, color: '#475661' }}>Program</Typography>
               <TextField
                 select
                 fullWidth
-                defaultValue=""
+                value={program}
+                onChange={(e) => setProgram(e.target.value)}
                 variant="outlined"
                 size="small"
                 InputProps={{ style: { color: '#475661' } }}
@@ -94,14 +141,28 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 <MenuItem value="" disabled>
                   Select Program
                 </MenuItem>
+                {[
+                  { id: 1, name: "Product Design" },
+                  { id: 2, name: "Software Engineering" },
+                  { id: 3, name: "Techpreneurship" },
+                  { id: 4, name: "Dev-ops" },
+                  { id: 5, name: "Creative Design" },
+                  { id: 6, name: "UX Writer" },
+                ].map((program) => (
+                  <MenuItem key={program.id} value={program.name}>
+                    {program.name}
+                  </MenuItem>
+                ))}
               </TextField>
             </Box>
 
+            {/* Start and End Date */}
             <Box sx={{ mb: 3, display: 'flex', gap: 2 }}>
-              <CustomDatePicker label="Start Date" />
-              <CustomDatePicker label="End Date" />
+              <CustomDatePicker label="Start Date" onChange={(date: Date | null) => setStartDate(date)} />
+              <CustomDatePicker label="End Date" onChange={(date: Date | null) => setEndDate(date)} />
             </Box>
 
+            {/* Cohort Avatar */}
             <Box sx={{ mb: 3 }}>
               <Typography variant="body2" sx={{ mb: 1, color: '#475661' }}>Add a cohort avatar</Typography>
               <Box
@@ -133,21 +194,37 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
                   type="file"
                   ref={fileInputRef}
                   style={{ display: 'none' }}
+                  onChange={handleFileChange}
                 />
-                  <Typography variant="caption" sx={{ textAlign: 'left', color: '#898d92' }}>
-                      240x240 px Recommended, max size 1MB
+                {selectedFile && (
+                  <Typography variant="caption" sx={{ mt: 2, color: '#475661' }}>
+                    Selected file: {selectedFile.name}
                   </Typography>
-              </Box>
-                <ErrorOutlineOutlinedIcon sx={{ fontSize: 16, color: '#475661' }} />
-                <Typography variant="caption" sx={{ textAlign: 'left', color: '#475661' }}>
-                   You can do this later.
+                )}
+                <Typography variant="caption" sx={{ textAlign: 'left', color: '#898d92' }}>
+                  240x240 px Recommended, max size 1MB
                 </Typography>
+              </Box>
+              <ErrorOutlineOutlinedIcon sx={{ fontSize: 16, color: '#475661' }} />
+              <Typography variant="caption" sx={{ textAlign: 'left', color: '#475661' }}>
+                You can do this later.
+              </Typography>
             </Box>
 
-           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
-               <CustomButton color="customBlue" text="Cancel" onClick={onClose} outline />
-               <CustomButton color="bg-gray-300 text-gray-700 hover:bg-blue-500 hover:text-white" text="Create Cohort"/>
-           </Box>
+            {formError && (
+              <Typography variant="body2" sx={{ color: 'red', mb: 2 }}>
+                {formError}
+              </Typography>
+            )}
+
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+              <CustomButton color="customBlue" text="Cancel" onClick={onClose} outline />
+              <CustomButton
+                color="bg-gray-300 text-gray-700 hover:bg-blue-500 hover:text-white"
+                text="Create Cohort"
+                onClick={handleSubmit}
+              />
+            </Box>
           </form>
         </Box>
       </Modal>
