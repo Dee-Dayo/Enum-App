@@ -18,7 +18,6 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
   const [cohortName, setCohortName] = useState("");
   const [description, setDescription] = useState("");
   const [program, setProgram] = useState("");
@@ -57,10 +56,9 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
     program,
     startDate,
     endDate,
-    selectedFileName: selectedFile?.name,
+    selectedFile,
   };
 
-  console.log(cohortData)
 
   dispatch(addCohort(cohortData));
 
@@ -116,7 +114,6 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
               />
             </Box>
 
-            {/* Description */}
             <Box sx={{ mb: 3 }}>
               <Typography variant="body2" sx={{ mb: 1, color: '#475661' }}>Description</Typography>
               <TextField
@@ -132,7 +129,6 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
               />
             </Box>
 
-            {/* Program */}
             <Box sx={{ mb: 3 }}>
               <Typography variant="body2" sx={{ mb: 1, color: '#475661' }}>Program</Typography>
               <TextField
@@ -187,23 +183,23 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 <FileUploadOutlinedIcon sx={{ fontSize: 40, color: '#475661' }} />
                 <Typography variant="body2" sx={{ mt: 1, color: '#475661' }}>
                   Drag and drop or{' '}
-                  <span
-                    onClick={handleFileChooseClick}
-                    style={{ fontWeight: 'bold', cursor: 'pointer', color: '#008eef' }}
-                  >
+                  <span onClick={handleFileChooseClick} style={{ fontWeight: 'bold', cursor: 'pointer', color: '#008eef' }}>
                     choose file
                   </span>
                 </Typography>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  style={{ display: 'none' }}
-                  onChange={handleFileChange}
-                />
+                <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} />
+
                 {selectedFile && (
-                  <Typography variant="caption" sx={{ mt: 2, color: '#475661' }}>
-                    Selected file: {selectedFile.name}
-                  </Typography>
+                  <Box sx={{ mt: 2 }}>
+                    <img
+                      src={URL.createObjectURL(selectedFile)}
+                      alt="Selected file preview"
+                      style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
+                    />
+                    <Typography variant="caption" sx={{ mt: 1, color: '#475661' }}>
+                      Selected file: {selectedFile.name}
+                    </Typography>
+                  </Box>
                 )}
                 <Typography variant="caption" sx={{ textAlign: 'left', color: '#898d92' }}>
                   240x240 px Recommended, max size 1MB

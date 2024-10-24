@@ -3,11 +3,16 @@
 import { FC, useState } from 'react';
 import Image from 'next/image';
 
-const Sidebar: FC = () => {
+interface SidebarProps {
+  onOptionChange: (option: string) => void;
+}
+
+const Sidebar: FC<SidebarProps> = ({ onOptionChange }) => {
   const [activeOption, setActiveOption] = useState('cohorts');
 
   const handleClick = (option: string) => {
     setActiveOption(option);
+    onOptionChange(option);
   };
 
   const getOptionClass = (option: string) => {
