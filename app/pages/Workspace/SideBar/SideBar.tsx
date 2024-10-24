@@ -1,9 +1,7 @@
 'use client'
 
 import { FC, useState } from 'react';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import { Assignment, Person } from '@mui/icons-material';
+import Image from 'next/image';
 
 const Sidebar: FC = () => {
   const [activeOption, setActiveOption] = useState('cohorts');
@@ -24,28 +22,52 @@ const Sidebar: FC = () => {
         className={`flex items-center mb-4 cursor-pointer w-48 p-2 ${getOptionClass('cohorts')}`}
         onClick={() => handleClick('cohorts')}
       >
-        <PeopleAltOutlinedIcon className={activeOption === 'cohorts' ? 'text-customBlue' : 'text-gray-600'} />
+        <Image
+          src="/users.png"
+          alt="Cohorts Icon"
+          width={20}
+          height={20}
+          className={activeOption === 'cohorts' ? 'text-customBlue' : 'text-gray-600'}
+        />
         <span className="ml-2">Cohorts</span>
       </div>
       <div
         className={`flex items-center mb-4 cursor-pointer w-48 p-2 ${getOptionClass('programs')}`}
         onClick={() => handleClick('programs')}
       >
-        <Assignment className={activeOption === 'programs' ? 'text-customBlue' : 'text-gray-600'} />
+        <Image
+          src="/program.png"
+          alt="Programs Icon"
+          width={20}
+          height={20}
+          className={activeOption === 'programs' ? 'text-customBlue' : 'text-gray-600'}
+        />
         <span className="ml-2">Programs</span>
       </div>
       <div
         className={`flex items-center mb-4 cursor-pointer w-48 p-2 ${getOptionClass('instructors')}`}
         onClick={() => handleClick('instructors')}
       >
-        <Person className={activeOption === 'instructors' ? 'text-customBlue' : 'text-gray-600'} />
+        <Image
+          src="/instructors.png"
+          alt="Instructors Icon"
+          width={20}
+          height={20}
+          className={activeOption === 'instructors' ? 'text-customBlue' : 'text-gray-600'}
+        />
         <span className="ml-2">Instructors</span>
       </div>
       <div
         className={`flex items-center mb-4 cursor-pointer w-48 p-2 ${getOptionClass('learners')}`}
         onClick={() => handleClick('learners')}
       >
-        <PersonOutlinedIcon className={activeOption === 'learners' ? 'text-customBlue' : 'text-gray-600'} />
+        <Image
+          src="/user.png"
+          alt="Learners Icon"
+          width={20}
+          height={20}
+          className={activeOption === 'learners' ? 'text-customBlue' : 'text-gray-600'}
+        />
         <span className="ml-2">Learners</span>
       </div>
     </div>

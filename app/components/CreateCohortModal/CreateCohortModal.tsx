@@ -5,6 +5,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import CustomDatePicker from "@/app/components/DatePicker/CustomDatePicker";
 import CustomButton from "@/app/components/Button/CustomBotton";
+import { useDispatch } from 'react-redux';
+import {addCohort} from "@/app/store/store";
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,6 +14,8 @@ interface ModalProps {
 }
 
 const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
+
+  const dispatch = useDispatch();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -37,8 +41,9 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleSubmit = () => {
-    e.preventDefault()
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (!cohortName || !description || !program || !startDate || !endDate || !selectedFile) {
     setFormError("All fields are required.");
     return;
@@ -55,7 +60,9 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
     selectedFileName: selectedFile?.name,
   };
 
-  sessionStorage.setItem("cohortData", JSON.stringify(cohortData));
+  console.log(cohortData)
+
+  dispatch(addCohort(cohortData));
 
   onClose();
 };
@@ -96,7 +103,6 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
           </Typography>
 
           <form>
-            {/* Cohort Name */}
             <Box sx={{ mb: 3 }}>
               <Typography variant="body2" sx={{ mb: 1, color: '#475661 ' }}>Cohort Name</Typography>
               <TextField
@@ -156,13 +162,11 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
               </TextField>
             </Box>
 
-            {/* Start and End Date */}
             <Box sx={{ mb: 3, display: 'flex', gap: 2 }}>
               <CustomDatePicker label="Start Date" onChange={(date: Date | null) => setStartDate(date)} />
               <CustomDatePicker label="End Date" onChange={(date: Date | null) => setEndDate(date)} />
             </Box>
 
-            {/* Cohort Avatar */}
             <Box sx={{ mb: 3 }}>
               <Typography variant="body2" sx={{ mb: 1, color: '#475661' }}>Add a cohort avatar</Typography>
               <Box
