@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import { Modal, Box, Typography, TextField, IconButton, MenuItem } from '@mui/material';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import CloseIcon from '@mui/icons-material/Close';
@@ -17,13 +17,25 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
 
   const dispatch = useDispatch();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = useState<string  | null>(null);
   const [cohortName, setCohortName] = useState("");
   const [description, setDescription] = useState("");
   const [program, setProgram] = useState("");
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [formError, setFormError] = useState("");
+
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedFile(null);
+      setCohortName("");
+      setDescription("");
+      setProgram("");
+      setStartDate(null);
+      setEndDate(null);
+      setFormError("");
+    }
+  }, [isOpen]);
 
   const handleFileChooseClick = () => {
     if (fileInputRef.current) {
@@ -36,7 +48,11 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedFile(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -56,9 +72,8 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
     program,
     startDate,
     endDate,
-    selectedFile,
+    avatar: selectedFile,
   };
-
 
   dispatch(addCohort(cohortData));
 
@@ -192,12 +207,12 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 {selectedFile && (
                   <Box sx={{ mt: 2 }}>
                     <img
-                      src={URL.createObjectURL(selectedFile)}
+                      src={selectedFile}
                       alt="Selected file preview"
                       style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
                     />
                     <Typography variant="caption" sx={{ mt: 1, color: '#475661' }}>
-                      Selected file: {selectedFile.name}
+                      Selected file: {selectedFile}
                     </Typography>
                   </Box>
                 )}

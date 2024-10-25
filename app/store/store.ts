@@ -6,7 +6,7 @@ interface Cohort {
   program: string;
   startDate: Date | null;
   endDate: Date | null;
-  selectedFile: string | null;
+  avatar: string | null;
 }
 
 interface Instructor {

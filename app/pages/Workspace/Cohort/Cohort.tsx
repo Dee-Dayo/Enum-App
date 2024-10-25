@@ -81,7 +81,20 @@ const Cohort: FC = () => {
                 <p>Program: {cohort.program}</p>
                 <p>Start Date: {cohort.startDate?.toLocaleDateString()}</p>
                 <p>End Date: {cohort.endDate?.toLocaleDateString()}</p>
-                <p>Avatar: {cohort.selectedFileName}</p>
+                {cohort.avatar && (
+                    <div>
+                      <p>Avatar:</p>
+                      <Image
+                          src={cohort.avatar}
+                          alt={`${cohort.cohortName} Avatar`}
+                          width={80}
+                          height={80}
+                          className="rounded-full object-cover"
+                          placeholder="blur"
+                          blurDataURL={cohort.avatar}
+                        />
+                      </div>
+                    )}
               </div>
             ))}
           </div>
