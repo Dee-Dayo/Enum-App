@@ -6,7 +6,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const Hero = () => {
   return (
-    <div className="relative h-40 bg-cover bg-center" style={{ backgroundImage: "url('/background.png')" }}>
+    <div className="relative h-40 bg-cover bg-center mt-16" style={{ backgroundImage: "url('/background.png')" }}>
       <div className="relative z-10 flex justify-start items-center h-full px-12">
         <div className="p-2 bg-white bg-opacity-65 rounded-md text-center w-50">
           <div className="flex items-center space-x-4 mb-1.5">
