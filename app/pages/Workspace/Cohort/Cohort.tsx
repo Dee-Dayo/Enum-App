@@ -5,6 +5,7 @@ import Image from 'next/image';
 import CreateCohortModal from "@/app/components/CreateCohortModal/CreateCohortModal";
 import { RootState } from "@/app/store/store";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import {IconButton} from "@mui/material";
 
 const Cohort: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,63 +45,81 @@ const Cohort: FC = () => {
             <CustomButton color="bg-customBlue text-white" text="Create a Cohort" onClick={openModal} />
           </>
         ) : (
-          <div className="w-full">
-            <div className="flex items-center justify-between p-4 border-b w-full">
-              <div className="flex items-center border-2 rounded px-2 py-1 w-1/4">
-                <Image src="/search.png" alt="Search Icon" width={20} height={20} />
-                <input type="text" placeholder="Search" className="px-2 py-1 w-full outline-none" />
+            <div className="w-full">
+              <div className="flex items-center justify-between p-4 border-b w-full">
+                <div className="flex items-center border-2 rounded px-2 py-1 w-1/4">
+                  <Image src="/search.png" alt="Search Icon" width={20} height={20}/>
+                  <input type="text" placeholder="Search" className="px-2 py-1 w-full outline-none"/>
+                </div>
+
+                <div className="flex space-x-2 justify-end relative">
+                  <CustomButton color="bg-blue-500" text="Create a cohort" onClick={openModal}/>
+
+                  <CustomButton
+                      color="customBlue"
+                      text="More Actions"
+                      outline
+                      onClick={toggleDropdown}
+                      icon={<MoreVertIcon sx={{fontSize: 24, color: '#475661'}}/>}
+                  />
+
+                  {isDropdownOpen && (
+                      <div ref={dropdownRef}
+                           className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-10">
+                        <ul>
+                          <li className="px-4 py-2 hover:customLightBlue cursor-pointer">Publish a poll</li>
+                          <li className="px-4 py-2 hover:customLightBlue cursor-pointer">Schedule an event</li>
+                          <li className="px-4 py-2 hover:customLightBlue cursor-pointer">Make an announcement</li>
+                        </ul>
+                      </div>
+                  )}
+                </div>
               </div>
 
-              <div className="flex space-x-2 justify-end relative">
-                <CustomButton color="bg-blue-500" text="Create a cohort" onClick={openModal} />
+              {cohorts.map((cohort, index) => (
+                  <div key={index} className="flex items-center justify-between border p-4 mb-2 rounded-lg">
+                    <div className="flex-shrink-0">
+                      {cohort.avatar ? (
+                          <Image
+                              src={cohort.avatar}
+                              alt={`${cohort.cohortName} Avatar`}
+                              width={50}
+                              height={50}
+                              className="rounded-full object-cover"
+                              style={{ borderRadius: '8px' }}
+                          />
+                      ) : (
+                          <div className="w-12 h-12 rounded-full bg-gray-200"/>
+                      )}
+                    </div>
 
-                <CustomButton
-                  color="customBlue"
-                  text="More Actions"
-                  outline
-                  onClick={toggleDropdown}
-                  icon={<MoreVertIcon sx={{ fontSize: 24, color: '#475661' }} />}
-                />
+                    <div className="flex flex-col ml-4 flex-grow">
+                      <h3 className="font-bold text-lg text-customGray">{cohort.cohortName}</h3>
+                      <div className="flex">
+                        <p className="text-sm text-gray-500 mr-6">{cohort.program}</p>
+                        <Image
+                            src="/user.png"
+                            alt="Programs Icon"
+                            width={20}
+                            height={20}
+                        />
+                        <p className="text-sm text-customGray">25 learners</p>
+                      </div>
+                    </div>
 
-                {isDropdownOpen && (
-                  <div ref={dropdownRef} className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-10">
-                    <ul>
-                      <li className="px-4 py-2 hover:customLightBlue cursor-pointer">Publish a poll</li>
-                      <li className="px-4 py-2 hover:customLightBlue cursor-pointer">Schedule an event</li>
-                      <li className="px-4 py-2 hover:customLightBlue cursor-pointer">Make an announcement</li>
-                    </ul>
+                    <div className="flex items-center ">
+                      <p className="text-sm text-gray-400">Created {cohort.startDate?.toLocaleDateString()}</p>
+                      <IconButton>
+                        <MoreVertIcon sx={{fontSize: 24, color: '#475661'}}/>
+                      </IconButton>
+                    </div>
                   </div>
-                )}
-              </div>
+              ))}
             </div>
 
-            {cohorts.map((cohort, index) => (
-              <div key={index} className="border p-4 mb-2 rounded-lg">
-                <h3 className="font-bold">{cohort.cohortName}</h3>
-                <p>{cohort.description}</p>
-                <p>Program: {cohort.program}</p>
-                <p>Start Date: {cohort.startDate?.toLocaleDateString()}</p>
-                <p>End Date: {cohort.endDate?.toLocaleDateString()}</p>
-                {cohort.avatar && (
-                    <div>
-                      <p>Avatar:</p>
-                      <Image
-                          src={cohort.avatar}
-                          alt={`${cohort.cohortName} Avatar`}
-                          width={80}
-                          height={80}
-                          className="rounded-full object-cover"
-                          placeholder="blur"
-                          blurDataURL={cohort.avatar}
-                        />
-                      </div>
-                    )}
-              </div>
-            ))}
-          </div>
         )}
       </div>
-      <CreateCohortModal isOpen={isModalOpen} onClose={closeModal} />
+      <CreateCohortModal isOpen={isModalOpen} onClose={closeModal}/>
     </div>
   );
 };
