@@ -7,6 +7,8 @@ import CustomDatePicker from "@/app/components/DatePicker/CustomDatePicker";
 import CustomButton from "@/app/components/Button/CustomBotton";
 import { useDispatch } from 'react-redux';
 import {addCohort} from "@/app/store/store";
+import Image from 'next/image';
+
 
 interface ModalProps {
   isOpen: boolean;
@@ -206,10 +208,12 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
 
                 {selectedFile && (
                   <Box sx={{ mt: 2 }}>
-                    <img
+                    <Image
                       src={selectedFile}
                       alt="Selected file preview"
-                      style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
+                      width={100}
+                      height={100}
+                      style={{ objectFit: 'cover', borderRadius: '8px' }}
                     />
                     <Typography variant="caption" sx={{ mt: 1, color: '#475661' }}>
                       Selected file: {selectedFile}
@@ -237,7 +241,7 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
               <CustomButton
                 color="bg-gray-300 text-gray-700 hover:bg-blue-500 hover:text-white"
                 text="Create Cohort"
-                onClick={handleSubmit}
+                onClick={() => handleSubmit}
               />
             </Box>
           </form>

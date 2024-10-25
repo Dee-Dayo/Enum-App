@@ -34,16 +34,6 @@ const Instructor: FC = () => {
               </div>
             </div>
 
-            {instructors.map((cohort, index) => (
-              <div key={index} className="border p-4 mb-2 rounded-lg">
-                <h3 className="font-bold">{cohort.cohortName}</h3>
-                <p>{cohort.description}</p>
-                <p>Program: {cohort.program}</p>
-                <p>Start Date: {cohort.startDate?.toLocaleDateString()}</p>
-                <p>End Date: {cohort.endDate?.toLocaleDateString()}</p>
-                <p>Avatar: {cohort.selectedFileName}</p>
-              </div>
-            ))}
           </div>
         )}
       </div>
