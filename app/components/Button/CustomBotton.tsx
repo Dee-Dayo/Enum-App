@@ -16,7 +16,7 @@ const CustomButton: FC<CustomButtonProps> = ({ color, text, onClick, outline = f
   return (
     <button className={buttonClass} onClick={onClick}>
       {text}
-      {icon && <span className="ml-2">{icon}</span>} {/* Render icon if passed */}
+      {icon && <span className="ml-2">{icon}</span>}
     </button>
   );
 };

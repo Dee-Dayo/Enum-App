@@ -58,8 +58,7 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = () => {
 
     if (!cohortName || !description || !program || !startDate || !endDate || !selectedFile) {
     setFormError("All fields are required.");
@@ -241,7 +240,7 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
               <CustomButton
                 color="bg-gray-300 text-gray-700 hover:bg-blue-500 hover:text-white"
                 text="Create Cohort"
-                onClick={() => handleSubmit}
+                onClick={handleSubmit}
               />
             </Box>
           </form>
