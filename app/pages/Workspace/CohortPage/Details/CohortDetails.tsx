@@ -3,7 +3,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Image from "next/image";
 import CustomButton from "@/app/components/Button/CustomBotton";
-import CohortDetailsSidebar from "@/app/pages/Workspace/CohortDetailsSidebar/CohortDetailsSidebar";
+import CohortDetailsSidebar from "@/app/pages/Workspace/CohortPage/Sidebar/CohortDetailsSidebar";
+import MoreInfo from "@/app/pages/Workspace/CohortPage/Info/MoreInfo";
 
 const CohortDetails = ({ cohort, onBack }) => {
   return (
@@ -46,6 +47,7 @@ const CohortDetails = ({ cohort, onBack }) => {
 
           <div className="flex">
               <CohortDetailsSidebar/>
+              <MoreInfo/>
           </div>
       </div>
   );

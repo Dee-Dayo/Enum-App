@@ -8,7 +8,7 @@ import CreateCohortModal from "@/app/components/CreateCohortModal/CreateCohortMo
 import { RootState } from "@/app/store/store";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IconButton } from "@mui/material";
-import CohortDetails from "@/app/pages/Workspace/CohortDetails/CohortDetails";
+import CohortDetails from "@/app/pages/Workspace/CohortPage/Details/CohortDetails";
 
 const Cohort: FC<{ onCohortSelect: (cohort: any) => void }> = ({ onCohortSelect }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

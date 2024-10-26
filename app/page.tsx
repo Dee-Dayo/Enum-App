@@ -2,10 +2,10 @@
 
 import Layout from "@/app/components/Layout/Layout";
 import Sidebar from "@/app/pages/Workspace/SideBar/SideBar";
-import Cohort from "@/app/pages/Workspace/Cohort/Cohort";
+import Cohort from "@/app/pages/Workspace/CohortPage/Cohort/Cohort";
 import { useState } from 'react';
 import Instructor from "@/app/pages/Workspace/Instructor/Instructor";
-import CohortDetails from "@/app/pages/Workspace/CohortDetails/CohortDetails";
+import CohortDetails from "@/app/pages/Workspace/CohortPage/Details/CohortDetails";
 
 export default function Page() {
   const [activeOption, setActiveOption] = useState('cohorts');

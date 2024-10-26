@@ -1,5 +1,3 @@
-// store.ts (or wherever your store is defined)
-
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Course {
@@ -19,10 +17,12 @@ interface Cohort {
 }
 
 interface Instructor {
-  instructorName: string;
-  email: string;
-  phone: string;
-  specialty: string;
+  id: string;
+  name: string;
+  school: string;
+  position: string;
+  avatar: string;
+  bio: string
 }
 
 interface CohortState {
@@ -66,6 +66,9 @@ const instructorSlice = createSlice({
     addInstructor: (state, action: PayloadAction<Instructor>) => {
       state.instructors.push(action.payload);
     },
+    setInstructors:(state, action: PayloadAction<Instructor[]>) =>{
+      state.instructors = action.payload;
+    }
   },
 });
 
@@ -83,14 +86,14 @@ const courseSlice = createSlice({
 });
 
 export const { addCohort } = cohortSlice.actions;
-export const { addInstructor } = instructorSlice.actions;
+export const { addInstructor, setInstructors } = instructorSlice.actions;
 export const { addCourse, setCourses } = courseSlice.actions;
 
 const store = configureStore({
   reducer: {
     cohorts: cohortSlice.reducer,
     instructors: instructorSlice.reducer,
-    courses: courseSlice.reducer, // add courses reducer
+    courses: courseSlice.reducer,
   },
 });
 
