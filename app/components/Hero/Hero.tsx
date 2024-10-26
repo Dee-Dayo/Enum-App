@@ -11,13 +11,13 @@ const Hero = () => {
         <div className="p-2 bg-white bg-opacity-65 rounded-md text-center w-50">
           <div className="flex items-center space-x-4 mb-1.5">
             <Image src="/semicolon_logo.png" alt="Semicolon Logo" width={40} height={40}/>
-            <h1 className="text-1xl font-bold text-black">Semicolon Africa</h1>
+            <h1 className="text-1xl font-bold text-customGray">Semicolon Africa</h1>
           </div>
           <Button
               variant="contained"
               disableElevation
               style={{ backgroundColor: 'white',
-                color: 'black',
+                color: '#475661',
                 width: '100%',
                 padding: '5px 5px',
                 textTransform: 'none'}}
