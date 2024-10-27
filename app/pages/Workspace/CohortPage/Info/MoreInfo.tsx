@@ -32,7 +32,7 @@ const MoreInfo: FC = () => {
       case 'instructors':
         return (
           <div>
-            <h2 className="font-semibold mb-4">{instructors.length} Instructors</h2>
+            <h2 className="font-semibold mb-4 text-lg md:text-xl">{instructors.length} Instructors</h2>
             {instructors.map((instructor) => (
               <div key={instructor.id} className="mb-4 p-4 border border-gray-300 rounded-lg">
                 <div className="flex items-center mb-2">
@@ -41,7 +41,7 @@ const MoreInfo: FC = () => {
                     <p className="text-md font-semibold">{instructor.name}</p>
                     <div className="flex items-center text-sm text-customGray">
                       <span>{instructor.school}</span>
-                      <span className="mx-2">|</span>
+                      <span className="mx-2 hidden sm:inline">|</span>
                       <span>{instructor.position}</span>
                     </div>
                   </div>
@@ -54,14 +54,10 @@ const MoreInfo: FC = () => {
       case 'courseInfo':
         return (
           <div>
-            <h2 className="font-semibold mb-4">Course Overview</h2>
-            <p>This course examines important issues in corporate finance from the perspectives of financial
-              managers who make financial investment decisions and financing decisions. This course incorporates
-              an element of financial modelling in teaching and assessments.
-            </p>
-            <h3 className="font-semibold mt-10 mb-2">Learning Outcomes</h3>
-            <p>What are you expected to know after this course</p>
-            <ul className="list-disc list-inside mt-2">
+            <h2 className="font-semibold mb-4 text-lg md:text-xl">Course Overview</h2>
+            <p className="text-sm md:text-base">This course examines important issues in corporate finance from the perspectives of financial managers who make financial investment decisions and financing decisions. This course incorporates an element of financial modelling in teaching and assessments.</p>
+            <h3 className="font-semibold mt-6 mb-2 text-lg md:text-xl">Learning Outcomes</h3>
+            <ul className="list-disc list-inside mt-2 text-sm md:text-base">
               <li>Understand various forms of market imperfections and their implications for financial managers.</li>
               <li>Generate a valuation range for a project or a company.</li>
               <li>Apply option theories to solve corporate finance problems.</li>
@@ -71,8 +67,8 @@ const MoreInfo: FC = () => {
         );
       case 'modules':
         return (
-          <div className="flex">
-            <div className="w-1/4 p-4 border-r border-gray-300">
+          <div className="flex flex-col md:flex-row">
+            <div className="md:w-1/4 p-4 border-b md:border-b-0 md:border-r border-gray-300">
               {modules.map((module) => (
                 <div
                   key={module.moduleId}
@@ -84,7 +80,7 @@ const MoreInfo: FC = () => {
               ))}
             </div>
 
-            <div className="w-3/4 p-4">
+            <div className="md:w-3/4 p-4">
               <div className="flex items-center justify-between cursor-pointer" onClick={() => setShowSessions(!showSessions)}>
                 <h3 className="font-semibold text-customBlue">Sessions</h3>
                 <button>
@@ -95,11 +91,11 @@ const MoreInfo: FC = () => {
               {showSessions && (
                 <div className="ml-4 mt-2">
                   {modules.find(module => module.moduleId === activeModuleId)?.sessions.map((session) => (
-                    <div key={session.id} className="items-center justify-between text-md mb-4 border-b border-gray-300">
+                    <div key={session.id} className="flex items-center justify-between text-sm md:text-md mb-4 border-b border-gray-300">
                       <span>{session.title}</span>
                       <div className="flex items-center">
                         <AccessTime fontSize="small" className="mr-1 text-gray-500" />
-                        <span className="text-sm text-gray-500">{session.duration}</span>
+                        <span className="text-xs md:text-sm text-gray-500">{session.duration}</span>
                       </div>
                     </div>
                   ))}
@@ -114,8 +110,8 @@ const MoreInfo: FC = () => {
   };
 
   return (
-    <div className="w-3/4 p-4 m-2 border border-gray-300 rounded text-customGray">
-      <div className="flex mb-4 border-b border-gray-300 pb-2">
+    <div className="w-full md:w-3/4 p-2 md:p-4 m-2 border border-gray-300 rounded text-customGray">
+      <div className="flex overflow-x-auto mb-4 border-b border-gray-300 pb-2">
         <button
           className={`relative mr-4 pb-2 ${activeTab === 'instructors' ? 'font-bold text-customGray' : ''}`}
           onClick={() => setActiveTab('instructors')}

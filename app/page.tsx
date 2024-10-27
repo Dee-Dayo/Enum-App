@@ -16,7 +16,7 @@ export default function Page() {
     setActiveOption(option);
   };
 
-  const handleCohortSelect = (cohort: CohortType) => { // Specify type for cohort
+  const handleCohortSelect = (cohort: CohortType) => {
     setSelectedCohort(cohort);
     setActiveOption('cohorts');
   };
