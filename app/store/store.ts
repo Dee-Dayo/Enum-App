@@ -7,13 +7,18 @@ interface Course {
   avatar: string;
 }
 
-interface Cohort {
+export interface Cohort {
   cohortName: string;
   description: string;
   program: string;
-  startDate: Date | null;
-  endDate: Date | null;
-  avatar: string | null;
+  startDate: Date;
+  endDate: Date;
+  avatar?: string;
+}
+
+export interface CohortDetailsProps {
+  cohort: Cohort;
+  onBack: () => void;
 }
 
 interface Instructor {
@@ -22,7 +27,19 @@ interface Instructor {
   school: string;
   position: string;
   avatar: string;
-  bio: string
+  bio: string;
+}
+
+interface Session {
+  id: string;
+  title: string;
+  duration: string;
+}
+
+interface Module {
+  moduleId: string;
+  title: string;
+  sessions: Session[];
 }
 
 interface CohortState {
@@ -37,6 +54,10 @@ interface CourseState {
   courses: Course[];
 }
 
+interface ModuleState {
+  modules: Module[];
+}
+
 const initialCohortState: CohortState = {
   cohorts: [],
 };
@@ -47,6 +68,10 @@ const initialInstructorState: InstructorState = {
 
 const initialCourseState: CourseState = {
   courses: [],
+};
+
+const initialModuleState: ModuleState = {
+  modules: [], // Empty initial state for modules
 };
 
 const cohortSlice = createSlice({
@@ -66,9 +91,9 @@ const instructorSlice = createSlice({
     addInstructor: (state, action: PayloadAction<Instructor>) => {
       state.instructors.push(action.payload);
     },
-    setInstructors:(state, action: PayloadAction<Instructor[]>) =>{
+    setInstructors: (state, action: PayloadAction<Instructor[]>) => {
       state.instructors = action.payload;
-    }
+    },
   },
 });
 
@@ -85,15 +110,27 @@ const courseSlice = createSlice({
   },
 });
 
+const moduleSlice = createSlice({
+  name: 'modules',
+  initialState: initialModuleState,
+  reducers: {
+    setModules: (state, action: PayloadAction<Module[]>) => {
+      state.modules = action.payload;
+    },
+  },
+});
+
 export const { addCohort } = cohortSlice.actions;
 export const { addInstructor, setInstructors } = instructorSlice.actions;
 export const { addCourse, setCourses } = courseSlice.actions;
+export const { setModules } = moduleSlice.actions;
 
 const store = configureStore({
   reducer: {
     cohorts: cohortSlice.reducer,
     instructors: instructorSlice.reducer,
     courses: courseSlice.reducer,
+    modules: moduleSlice.reducer,
   },
 });
 

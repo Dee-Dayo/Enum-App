@@ -209,6 +209,10 @@ const CreateCohortModal: FC<ModalProps> = ({ isOpen, onClose }) => {
                   </Box>
                 )}
               </Box>
+              <div className="flex">
+                <ErrorOutlineOutlinedIcon sx={{ fontSize: 20, color: '#475661' }} />
+                <Typography variant="body2" sx={{ mb: 1, color: '#475661' }}>You can do this later</Typography>
+              </div>
             </Box>
 
             {formError && (

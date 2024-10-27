@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {FC} from 'react';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Image from "next/image";
 import CustomButton from "@/app/components/Button/CustomBotton";
 import CohortDetailsSidebar from "@/app/pages/Workspace/CohortPage/Sidebar/CohortDetailsSidebar";
 import MoreInfo from "@/app/pages/Workspace/CohortPage/Info/MoreInfo";
+import {CohortDetailsProps} from "@/app/store/store";
 
-const CohortDetails = ({ cohort, onBack }) => {
+const CohortDetails: FC<CohortDetailsProps> = ({ cohort, onBack }) => {
   return (
       <div className="p-2">
           <button onClick={onBack} className="flex items-center text-customGray">
