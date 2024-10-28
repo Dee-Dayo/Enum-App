@@ -13,7 +13,7 @@ import CohortDetails from "@/app/pages/Workspace/CohortPage/Details/CohortDetail
 const Cohort: FC<{ onCohortSelect: (cohort: Cohort) => void }> = ({ onCohortSelect }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedCohort, setSelectedCohort] = useState<Cohort | null>(null); // Specify type for selectedCohort
+  const [selectedCohort, setSelectedCohort] = useState<Cohort | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);

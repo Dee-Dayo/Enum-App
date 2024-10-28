@@ -28,7 +28,7 @@ const CohortDetails: FC<CohortDetailsProps> = ({ cohort, onBack }) => {
               ) : (
                   <div className="w-16 h-16 rounded-full bg-gray-200 mr-4"/>
               )}
-              <div className="flex flex-col ml-4 flex-grow hidden md:block">
+              <div className="flex-col ml-4 flex-grow hidden md:block">
                   <h3 className="font-bold text-lg text-customGray">{cohort.cohortName}</h3>
                   <div className="flex">
                       <p className="text-sm text-customBlue font-semibold mr-6">{cohort.program}</p>
@@ -47,10 +47,10 @@ const CohortDetails: FC<CohortDetailsProps> = ({ cohort, onBack }) => {
           </div>
 
           <div className="flex">
-              <div className="hidden md:block">
+              <div className="w-1/4 hidden md:block">
                   <CohortDetailsSidebar/>
               </div>
-              <div className="flex-grow">
+              <div className="w-3/4">
                   <MoreInfo/>
               </div>
           </div>

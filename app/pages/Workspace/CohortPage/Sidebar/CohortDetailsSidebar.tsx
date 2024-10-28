@@ -16,7 +16,7 @@ const CohortDetailsSideBar: FC = () => {
   const courses = useSelector((state: RootState) => state.courses.courses);
 
   return (
-    <div className="w-1/4 p-2">
+    <div className="w-full p-2">
       <div className="mb-4">
         <input
           type="text"
