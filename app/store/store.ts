@@ -16,6 +16,17 @@ export interface Cohort {
   avatar?: string;
 }
 
+export interface Facilitator {
+  id: string;
+  avatar: string;
+  fullName: string;
+  email: string;
+  organizationLogo: string;
+  course: string;
+  status: string;
+  dateAdded: string;
+}
+
 export interface CohortDetailsProps {
   cohort: Cohort;
   onBack: () => void;
@@ -58,9 +69,14 @@ interface ModuleState {
   modules: Module[];
 }
 
+
 const initialCohortState: CohortState = {
   cohorts: [],
 };
+
+interface FacilitatorState {
+  facilitators: Facilitator[];
+}
 
 const initialInstructorState: InstructorState = {
   instructors: [],
@@ -71,7 +87,11 @@ const initialCourseState: CourseState = {
 };
 
 const initialModuleState: ModuleState = {
-  modules: [], // Empty initial state for modules
+  modules: [],
+};
+
+const initialFacilitatorState: FacilitatorState = {
+  facilitators: [],
 };
 
 const cohortSlice = createSlice({
@@ -93,6 +113,19 @@ const instructorSlice = createSlice({
     },
     setInstructors: (state, action: PayloadAction<Instructor[]>) => {
       state.instructors = action.payload;
+    },
+  },
+});
+
+const facilitatorSlice = createSlice({
+  name: 'facilitators',
+  initialState: initialFacilitatorState,
+  reducers: {
+    addFacilitator: (state, action: PayloadAction<Facilitator>) => {
+      state.facilitators.push(action.payload);
+    },
+    setFacilitators: (state, action: PayloadAction<Facilitator[]>) => {
+      state.facilitators = action.payload;
     },
   },
 });
@@ -124,6 +157,7 @@ export const { addCohort } = cohortSlice.actions;
 export const { addInstructor, setInstructors } = instructorSlice.actions;
 export const { addCourse, setCourses } = courseSlice.actions;
 export const { setModules } = moduleSlice.actions;
+export const { addFacilitator, setFacilitators } = facilitatorSlice.actions;
 
 const store = configureStore({
   reducer: {
@@ -131,6 +165,7 @@ const store = configureStore({
     instructors: instructorSlice.reducer,
     courses: courseSlice.reducer,
     modules: moduleSlice.reducer,
+    facilitators: facilitatorSlice.reducer,
   },
 });
 

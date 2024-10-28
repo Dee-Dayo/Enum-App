@@ -116,7 +116,6 @@ const Cohort: FC<{ onCohortSelect: (cohort: Cohort) => void }> = ({ onCohortSele
                         </div>
                       </div>
 
-                      {/* Show dropdown icon */}
                       <div className="flex items-center">
                         <IconButton>
                           <MoreVertIcon sx={{ fontSize: 24, color: '#475661' }} />
