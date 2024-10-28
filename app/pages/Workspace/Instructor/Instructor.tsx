@@ -20,7 +20,7 @@ const Instructor: FC = () => {
           <>
             <Image src="/empty.png" alt="Empty State" width={170.85} height={143.55} className="mb-4" />
             <h2 className="text-2xl font-semibold mb-2 text-customGray">Empty Space</h2>
-            <p className="text-customGray mb-4">No facilitator has been invited, let's get you started by clicking the button below</p>
+            <p className="text-customGray mb-4">No facilitator has been invited, lets get you started by clicking the button below</p>
             <CustomButton color="bg-customBlue text-white" text="Invite Facilitators" />
           </>
         ) : (
@@ -38,23 +38,27 @@ const Instructor: FC = () => {
                 <CustomButton color="bg-customBlue" text="Invite Facilitator" />
               </div>
             </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between text-customGray p-2">
                   <span>INSTRUCTOR</span>
                   <h2>ORGANIZATION</h2>
                   <h2>COURSE</h2>
                   <h2>STATUS</h2>
                   <h2>DATE ADDED</h2>
               </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+            <div >
               {facilitators.map((facilitator) => (
-                <div key={facilitator.id} className="flex flex-col items-center p-4 border rounded shadow">
-                  <Image src={facilitator.avatar} alt={facilitator.fullName} width={100} height={100} className="rounded-full mb-2" />
-                  <h3 className="text-lg font-semibold">{facilitator.fullName}</h3>
-                  <p className="text-sm text-customGray">{facilitator.organization}</p>
-                  <p className="text-sm text-customGray">{facilitator.course}</p>
-                  <p className="text-sm text-customGray">{facilitator.status}</p>
-                  <p className="text-sm text-customGray">{facilitator.dateAdded}</p>
-                  <CustomButton color="bg-blue-500 text-white mt-2" text="View Profile" />
+                <div key={facilitator.id} className="flex justify-between items-center p-4">
+                    <div className="flex">
+                        <Image src={facilitator.avatar} alt={facilitator.fullName} width={40} height={40} className="rounded-full mb-2" />
+                        <div>
+                            <h3 className="font-semibold text-customGray">{facilitator.fullName}</h3>
+                            <p className="text-sm text-customGray">{facilitator.email}</p>
+                        </div>
+                    </div>
+                    <Image src={facilitator.organizationLogo} alt={"logo"} width={108} height={40} className="rounded-full mb-2" />
+                    <p className="text-sm text-customGray">{facilitator.course}</p>
+                    <p className="text-sm text-customGray">{facilitator.status}</p>
+                    <p className="text-sm text-customGray">{facilitator.dateAdded}</p>
                 </div>
               ))}
             </div>
